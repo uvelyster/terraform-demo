@@ -1,0 +1,1 @@
+ssh-keygen -t rsa -b 4069 -C {cmshim22@naver.com} -f "terraform-key" -N ""

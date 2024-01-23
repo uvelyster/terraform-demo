@@ -1,0 +1,1 @@
+#!/bin/bash sudo yum install -y httpd sudo systemctl enable --now httpd echo "Hello, World" > /var/www/html/index.html
