@@ -1,0 +1,19 @@
+provider "aws" {
+  region = "ap-northeast-2"
+}
+
+resource "aws_instance" "example" {
+  ami = "ami-0f3a440bbcff3d043"
+  instance_type = "t3.micro"
+}
+
+terraform {
+  backend "s3" {
+    bucket = "terraform-state-uvely"
+    key = "workspaces-example/terraform.tfstate"
+    region = "ap-northeast-2"
+    dynamodb_table = "terraform-locks"
+    encrypt = true
+  }
+}
+
