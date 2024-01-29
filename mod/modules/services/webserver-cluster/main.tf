@@ -19,11 +19,11 @@ resource "aws_autoscaling_group" "example" {
   vpc_zone_identifier = data.aws_subnets.default.ids
   target_group_arns = [aws_lb_target_group.asg.arn]
   health_check_type = "ELB"
-  min_size = var.min_size 
+  min_size = var.min_size
   max_size = var.max_size
   tag {
     key = "Name"
-    value = "${var.cluster_name}-asg"
+    value = var.cluster_name
     propagate_at_launch = true
   }
 }
@@ -40,7 +40,7 @@ resource "aws_security_group" "instance"{
 }
 
 resource "aws_lb" "example" {
-  name = "${var.cluster_name}-lb"
+  name = "${var.cluster_name}-example"
   load_balancer_type = "application"
   subnets = data.aws_subnets.default.ids
   security_groups = [aws_security_group.alb.id]
@@ -63,16 +63,19 @@ resource "aws_lb_listener" "http" {
 resource "aws_security_group" "alb" {
   name = "${var.cluster_name}-alb"
 }
-resource "aws_security_group_rule" "allw_http_inbound" {
-  type = ingress
+
+resource "aws_security_group_rule" "allow_http_inbound" {
+  type = "ingress" 
   security_group_id = aws_security_group.alb.id
   from_port = local.http_port
   to_port = local.http_port
   protocol = local.tcp_protocol
   cidr_blocks = local.all_ips
 }
-resource "aws_security_group_rule" "allw_http_outbound" {
-  type = egress
+
+resource "aws_security_group_rule" "allow_http_outbound" {
+  type = "egress" 
+  security_group_id = aws_security_group.alb.id
   from_port = local.any_port
   to_port = local.any_port
   protocol = local.any_protocol

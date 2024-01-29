@@ -12,7 +12,7 @@ resource "aws_db_instance" "example" {
   username = var.db_username
   password = var.db_password
 }
-/*
+
 terraform {
   backend "s3" {
     bucket = "terraform-state-uvely"
@@ -22,4 +22,3 @@ terraform {
     encrypt = true
   }
 }
-*/

@@ -4,9 +4,9 @@ provider "aws" {
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "terraform-state-uvely"
-  lifecycle {
-    prevent_destroy = true
-  }
+#  lifecycle {
+#    prevent_destroy = true
+#  }
 }
 
 resource "aws_s3_bucket_versioning" "enabled" {
@@ -42,7 +42,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
     type = "S"
   }
 }
-/*
+
 terraform {
   backend "s3" {
     bucket = "terraform-state-uvely"
@@ -52,4 +52,4 @@ terraform {
     encrypt = true
   }
 }
-*/
+

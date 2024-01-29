@@ -6,18 +6,17 @@ locals {
   all_ips = ["0.0.0.0/0"]
 }
 
+
 variable "cluster_name" {
-  description = "The name to use for all cluster resources"
+  description = "The name to use for all the cluster resources"
   type = string
 }
-
 variable "db_remote_state_bucket" {
-  description = "The name of S3 bucket for databases remote state"
+  description = "The name of the S3 bucket for the database's remote state"
   type = string
 }
-
 variable "db_remote_state_key" {
-  description = "The path for the databases remote state in s3"
+  description = "The path for the database's remote state in S3"
   type = string
 }
 
